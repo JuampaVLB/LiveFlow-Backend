@@ -3,6 +3,8 @@ import User from '../models/user.js'
 export const VerifyRegister = async (req, res, next) => {
   const { username, password, email, tel } = req.body
 
+  if (!isNaN(tel) === false) return res.status(400).json({ message: 'This tel is not a number' })
+
   const userDuplicate = await User.findOne({ username })
 
   if (userDuplicate) return res.status(400).json({ message: 'The user already exists' })
@@ -14,6 +16,8 @@ export const VerifyRegister = async (req, res, next) => {
   const telDuplicate = await User.findOne({ tel })
 
   if (telDuplicate) return res.status(400).json({ message: 'The tel already exists' })
+
+  if (!username || !password || !email || !tel) return res.status(400).json({ message: 'Incomplete form' })
 
   if (username.length <= 4) {
     return res.status(400).json({ message: 'The username is invalid' })
