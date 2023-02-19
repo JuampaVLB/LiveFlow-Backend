@@ -7,5 +7,6 @@ const router = Router()
 router
   .post('/login', VerifyLogin, userController.login)
   .post('/register', VerifyRegister, userController.register)
+  .post('/token', userController.token)
 
 export default router

@@ -17,9 +17,11 @@ const server = http.createServer(app)
 
 const io = new SocketServer(server, {
   cors: {
-    origin: 'https://liveflow.vercel.app'
+    origin: 'http://localhost:5173'
   }
 })
+
+// https://liveflow.vercel.app
 
 sockets(io)
 

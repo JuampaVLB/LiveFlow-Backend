@@ -76,3 +76,17 @@ export const register = async (req, res) => {
     res.json({ error, message: 'Error Request' })
   }
 }
+
+export const token = async (req, res) => {
+  const { token } = req.body
+
+  if (!token) return res.status(400).json({ message: 'token no provided' })
+
+  const decoded = jwt.verify(token, process.env.SECRET)
+
+  const newUser = await User.findById(decoded.id)
+
+  if (!newUser) return res.status(404).json({ message: 'no user found' })
+
+  return res.status(200).json({ user: newUser })
+}

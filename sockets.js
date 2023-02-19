@@ -6,8 +6,8 @@ export default (io) => {
       console.log(data)
 
       socket.broadcast.emit('message', {
-        body: data,
-        from: 'server'
+        body: data.body,
+        from: data.from
       })
     })
   })
